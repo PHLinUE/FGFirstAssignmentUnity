@@ -7,6 +7,7 @@ public class ActivePlayerInput : MonoBehaviour
     [SerializeField] private ActivePlayerManager manager;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float walkingSpeed;
+  //  [SerializeField] private Rigidbody characterBody;
 
     void Update()
     {
@@ -29,6 +30,33 @@ public class ActivePlayerInput : MonoBehaviour
                 ActivePlayer currentPlayer = manager.GetCurrentPlayer();
                 currentPlayer.GetComponent<ActivePlayerWeapon>().ShootLaser();
             }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
         }
     }
+
+    private void Jump()
+    {
+        //characterBody.velocity = Vector3.up * 10f;
+        //characterBody.AddForce(Vector3.up * 500f);
+    }
+
+    private bool IsTouchingFloor()
+    {
+        RaycastHit hit;
+        // Parameters:
+        // - The center from where we shoot
+        // - Radius of the sphere
+        // - Direction of the sphere
+        // - hit parameter
+        // - Distance the sphere
+        bool result = Physics.SphereCast(transform.position, 0.15f, -transform.up, out hit, 1f);
+        return result;
+    
+    }
+
 }
+

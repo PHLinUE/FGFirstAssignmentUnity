@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ActivePlayerInput : MonoBehaviour
@@ -7,10 +9,14 @@ public class ActivePlayerInput : MonoBehaviour
     [SerializeField] private ActivePlayerManager manager;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float walkingSpeed;
-  //  [SerializeField] private Rigidbody characterBody;
+    public GroundCollisions script;
+
+
 
     void Update()
     {
+        
+
         if (manager.PlayerCanPlay())
         {
             if (Input.GetAxis("Horizontal") != 0)
@@ -33,29 +39,30 @@ public class ActivePlayerInput : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Jump();
+                if (script.touchGround == true)
+                
+                {
+
+                    Jump();
+
+                }
+
+                //ActivePlayer currentPlayer = manager.GetCurrentPlayer();
+                //Rigidbody currentRigidbody = manager.GetCurrentRigidbody();
+                //currentPlayer.transform.Translate(currentRigidbody.transform.up * 500f * Time.deltaTime * Input.GetAxis("Vertical"), Space.World);
+                //currentRigidbody.AddForce(Vector3.up * 500f);
+
             }
+
         }
     }
 
     private void Jump()
     {
-        //characterBody.velocity = Vector3.up * 10f;
-        //characterBody.AddForce(Vector3.up * 500f);
-    }
-
-    private bool IsTouchingFloor()
-    {
-        RaycastHit hit;
-        // Parameters:
-        // - The center from where we shoot
-        // - Radius of the sphere
-        // - Direction of the sphere
-        // - hit parameter
-        // - Distance the sphere
-        bool result = Physics.SphereCast(transform.position, 0.15f, -transform.up, out hit, 1f);
-        return result;
-    
+        ActivePlayer currentPlayer = manager.GetCurrentPlayer();
+        Rigidbody currentRigidbody = manager.GetCurrentRigidbody();
+        currentPlayer.transform.Translate(currentRigidbody.transform.up * 500f * Time.deltaTime * Input.GetAxis("Vertical"), Space.World);
+        currentRigidbody.AddForce(Vector3.up * 500f);
     }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ActivePlayer : MonoBehaviour
 {
     private ActivePlayerManager manager;
+    [SerializeField] private Rigidbody characterBody;
 
     public void AssignManager(ActivePlayerManager theManager)
     {

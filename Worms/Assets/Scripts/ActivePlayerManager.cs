@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
 public class ActivePlayerManager : MonoBehaviour
 {
     [SerializeField] private ActivePlayer player1;
@@ -12,10 +13,14 @@ public class ActivePlayerManager : MonoBehaviour
     [SerializeField] private float timeBetweenTurns;
     [SerializeField] private Image clock;
     [SerializeField] private TextMeshProUGUI seconds;
+    [SerializeField] private Rigidbody rigidbody1;
+    [SerializeField] private Rigidbody rigidbody2;
+
 
     private ActivePlayer currentPlayer;
     private float currentTurnTime;
     private float currentDelay;
+    private Rigidbody currentRigidbody;
 
     void Start()
     {
@@ -23,6 +28,7 @@ public class ActivePlayerManager : MonoBehaviour
         player2.AssignManager(this);
 
         currentPlayer = player1;
+        currentRigidbody = rigidbody1;
     }
 
     private void Update()
@@ -54,15 +60,32 @@ public class ActivePlayerManager : MonoBehaviour
         return currentPlayer;
     }
 
+    public Rigidbody GetCurrentRigidbody()
+    {
+        return currentRigidbody;
+    }
+
     public void ChangeTurn()
     {
         if (player1 == currentPlayer)
         {
             currentPlayer = player2;
+           
         }
         else if (player2 == currentPlayer)
         {
             currentPlayer = player1;
+       
+        }
+
+        if (player1 == currentPlayer)
+        {
+            currentRigidbody = rigidbody1;
+        }
+        if (player2 == currentPlayer)
+        {
+            currentRigidbody = rigidbody2;
+
         }
 
         ResetTimers();

@@ -6,12 +6,14 @@ using UnityEngine;
 public class GroundCollisions : MonoBehaviour
 {
 
+
+    public bool touchGround;
+
     private void Start()
     {
         touchGround = true;
     }
 
-    public bool touchGround;
     [SerializeField] private MeshRenderer meshRenderer;
 
     public void OnCollisionEnter(Collision collision)

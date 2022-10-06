@@ -47,11 +47,6 @@ public class ActivePlayerInput : MonoBehaviour
 
                 }
 
-                //ActivePlayer currentPlayer = manager.GetCurrentPlayer();
-                //Rigidbody currentRigidbody = manager.GetCurrentRigidbody();
-                //currentPlayer.transform.Translate(currentRigidbody.transform.up * 500f * Time.deltaTime * Input.GetAxis("Vertical"), Space.World);
-                //currentRigidbody.AddForce(Vector3.up * 500f);
-
             }
 
         }
